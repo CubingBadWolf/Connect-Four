@@ -40,9 +40,8 @@ public:
     }
 
     void PrintBoard(){
-        for(int i; i < size; i++){
-            int c = 0;
-            for(int c; c < 3; c++){
+        for(int i =0; i < size; i++){
+            for(int c = 0; c < 3; c++){
                 std::cout << (spaces[c] * size) << '|' <<std::endl;
             }
 
@@ -56,4 +55,5 @@ int main(){
     Game.GenBoard();
     Game.PrintBoard();
     Game.DeleteBoard();
+    system("pause");
 }
