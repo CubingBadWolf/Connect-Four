@@ -13,7 +13,7 @@ string operator * (string a, unsigned int b) {
 
 class Board{
 private:
-    string spaces[3] = {"|  ", "|  ", "|__"};
+    string spaces[3] = {"|   ", "|   ", "|___"};
     int size;
 protected:
 public:
@@ -40,12 +40,16 @@ public:
     }
 
     void PrintBoard(){
-        for(int i =0; i < size; i++){
+        for(int i = 0; i < size; i++){
             for(int c = 0; c < 3; c++){
                 std::cout << (spaces[c] * size) << '|' <<std::endl;
             }
-
-        }    
+        }
+        std::cout << "  ";
+        for(int c = 0; c < size; c++){
+                std::cout << c << "   ";
+        }
+        std::cout << std::endl;
     }
 };
 
