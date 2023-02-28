@@ -26,7 +26,7 @@ public:
         gameboard = new char[size];
         for (int i = 0; i < size; i++){
             for (int j = 0; j < size; j++){
-                gameboard[i*size + j] = char(i + 48); //i is row, j is collumn
+                gameboard[i*size + j] = ' '; //i is row, j is collumn
             }
         }
     }
@@ -50,30 +50,60 @@ public:
         std::cout << std::endl;
     }
 
-    void PlaceToken(int player){
+    int PlaceToken(int player){
+        while(true){
+            int row;
+            int collumn;
+            std::cout << "Player " << player;
 
+            while(true){
+                collumn = verifyInputs(", Enter which collumn you would like to place in");
+                if (collumn < 0 || collumn > size-1){
+                    std::cout << "Please enter a valid collumn" << std::endl;
+                }
+                else{
+                    break;
+                }
+            }
+
+            row = size;
+            while(row-->0){
+                if(gameboard[row*size + collumn] == ' '){
+                    gameboard[row*size + collumn] = char(player+48);
+                    return 0;
+                }
+                else if(row == 0){
+                    std::cout << "Collumn is full, Please enter a different collumn" << std::endl;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
     }
-    void CheckWin(){
-        
+
+    bool CheckWin(){
+        return false;
     }
 };
 
-bool gameLoop(Board Game){
-    Game.PrintBoard();
-    Game.PlaceToken(1);
-    Game.CheckWin();
-    Game.PlaceToken(2);
-    Game.CheckWin();
-}
+
 int main(){
     int size = 7;
     Board game(size);
     game.GenBoard();
 
     bool win = false;
+    short c = 1;
+
     while (!win){
-        win = gameLoop(game);
+        game.PrintBoard();
+        game.PlaceToken(c%2);
+        win = game.CheckWin();
+        c++;
     }
+
     game.DeleteBoard();
     system("pause");
+    return 0;
 }
