@@ -26,7 +26,7 @@ public:
         gameboard = new char[size];
         for (int i = 0; i < size; i++){
             for (int j = 0; j < size; j++){
-                gameboard[i*size + j] = char(i + 48);
+                gameboard[i*size + j] = char(i + 48); //i is row, j is collumn
             }
         }
     }
@@ -53,13 +53,27 @@ public:
     void PlaceToken(int player){
 
     }
+    void CheckWin(){
+
+    }
 };
 
+bool gameLoop(Board Game){
+    Game.PrintBoard();
+    Game.PlaceToken(1);
+    Game.CheckWin();
+    Game.PlaceToken(2);
+    Game.CheckWin();
+}
 int main(){
     int size = 7;
-    Board Game(size);
-    Game.GenBoard();
-    Game.PrintBoard();
-    Game.DeleteBoard();
+    Board game(size);
+    game.GenBoard();
+
+    bool win = false;
+    while (!win){
+        win = gameLoop(game);
+    }
+    game.DeleteBoard();
     system("pause");
 }
