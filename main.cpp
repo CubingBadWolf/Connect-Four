@@ -49,7 +49,7 @@ public:
     }
 
     void PrintBoard(){
-        for(int i = 0; i < size; i++){
+        for(int i = 1; i < size; i++){
             std::cout << (spaces[0] * size) << '|' <<std::endl;
             for(int c = 0; c < size; c++){
                 std::cout << "| " << gameboard[i*size + c] << " ";
@@ -79,12 +79,12 @@ public:
             }
 
             row = size;
-            while(row-->0){
+            while(row-->1){
                 if(gameboard[row*size + collumn] == ' '){
                     gameboard[row*size + collumn] = '0'+player;
                     return 0;
                 }
-                else if(row == 0){
+                else if(row == 1){
                     std::cout << "Collumn is full, Please enter a different collumn" << std::endl;
                 }
                 else{
@@ -95,7 +95,7 @@ public:
     }
 
     bool BetterCheckWin(char player){
-        for(int i = 0; i < size; i++){
+        for(int i = 1; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(gameboard[i*size+j] == player){
                     if(i < size-3){
@@ -177,8 +177,7 @@ public:
 };
 
 int main(){
-    //TODO make board have different height and length, A real connect 4 has dimensions of 7x6
-    int size = 7;
+    int size = 7; //Ignores the top row to create a 7x6 board
     Board game(size);
     game.GenBoard();
 
@@ -186,6 +185,7 @@ int main(){
     short turns = 0;
 
     while (!win){
+        std::cout << std::endl;
         game.PrintBoard();
         game.PlaceToken(turns%2);
         win = game.BetterCheckWin(('0'+turns%2));
