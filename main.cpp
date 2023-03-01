@@ -37,7 +37,7 @@ public:
         size = Size;
     }
     void GenBoard(){
-        gameboard = new char[size];
+        gameboard = new char[size*2];
         for (int i = 0; i < size; i++){
             for (int j = 0; j < size; j++){
                 gameboard[i*size + j] = ' '; //i is row, j is collumn
